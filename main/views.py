@@ -1,9 +1,26 @@
 from django.shortcuts import render,redirect
-from .models import Contact
+from .models import Contact,Service,Realisation,Avis
 from django.contrib import messages
 
 def index(request):
-    return render(request, 'index.html')
+    # Récupérer tous les services
+    services = Service.objects.all()
+    for service in services:
+        service.is_external = service.link.startswith('http')
+
+    # Récupérer toutes les réalisations
+    realisations = Realisation.objects.all()
+
+    # Récupérer tous les avis
+    avis_list = Avis.objects.all()  # Récupérer tous les avis
+
+    # Rendre le template avec les services, réalisations et avis
+    return render(request, 'index.html', {
+        'services': services,
+        'realisations': realisations,
+        'avis_list': avis_list  # Ajouter les avis à la context
+    })
+
 
 def apropos(request):
     return render(request, 'a-propos.html')

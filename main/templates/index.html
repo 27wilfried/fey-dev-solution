@@ -17,14 +17,15 @@
     {% load static %}
 
     <!-- Inclure le fichier CSS -->
-    <link rel="stylesheet" href="{% static 'assets/styles/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/styles/style.css' %}?{{ time }}">
 </head>
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-3" style="background-color: #1c1d1f;">
         <div class="container">
-            <a href="{% url 'index' %}"><img src="{% static 'assets/images/logo.png' %}" alt="Logo"></a>
+            <a href="{% url 'index' %}"><img src="{% static 'assets/images/logo.png' %}" alt="Logo"
+                    style="width: 90px; height: auto;"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -32,26 +33,29 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'index' %}">Accueil</a>
+                        <a class="nav-link active" href="{% url 'index' %}" style="font-size: 1.2rem;">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'apropos' %}">À Propos</a>
+                        <a class="nav-link" href="{% url 'apropos' %}" style="font-size: 1.2rem;">À Propos</a>
                     </li>
 
                     <!-- Dropdown pour Nos Services -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                            data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 1.2rem;">
                             Nos Services
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                            <li><a class="dropdown-item" href="{% url 'creationSiteWeb' %}">Création de site web</a>
+                            <li><a class="dropdown-item" href="{% url 'creationSiteWeb' %}"
+                                    style="font-size: 1.2rem;">Création de site web</a>
                             </li>
-                            <li><a class="dropdown-item" href="{% url 'referencement' %}">Référencement SEO</a></li>
-                            <li><a class="dropdown-item" href="{% url 'maintenance' %}">Maintenance</li>
+                            <li><a class="dropdown-item" href="{% url 'referencement' %}"
+                                    style="font-size: 1.2rem;">Référencement SEO</a></li>
+                            <li><a class="dropdown-item" href="{% url 'maintenance' %}"
+                                    style="font-size: 1.2rem;">Maintenance</li>
                         </ul>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                        <a class="nav-link" href="{% url 'contact' %}" style="font-size: 1.2rem;">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -68,7 +72,8 @@
                 <div class="col-md-6">
                     <h1>Fay Dev Solutions</h1>
                     <h2 class="py-2">AGENCE WEB ET SEO</h2>
-                    <p>Maximisez votre impact digital avec nos solutions web innovantes et un SEO qui génère des
+                    <p style="color: white;">Maximisez votre impact digital avec nos solutions web innovantes et un SEO
+                        qui génère des
                         résultats concrets.</p>
                     <a href="#services" class="btn btn-service btn-custom"
                         style="background-color: #f6b42e; text-decoration: #014d6d;">Nos services</a>
@@ -85,7 +90,7 @@
     <!-- About Section -->
     <section id="about" class="bg-light">
         <div class="container">
-            <h2 style="font-family: 'Montserrat', sans-serif">QUI SOMMES NOUS?</h2>
+            <h2 style="font-family: 'Montserrat', sans-serif; color: #555454">QUI SOMMES NOUS?</h2>
             <h3 class=" text-center ">À propos.</h3>
             <div class=" row about-p">
                 <div class="col-md-6">
@@ -110,64 +115,40 @@
     <section id="services">
         <div class="container mt-5">
             <a href="#services"></a>
-            <h2 class="py-5" style="font-family: 'Montserrat', sans-serif">NOS SOLUTIONS</h2>
+            <h2 class="py-5" style="font-family: 'Montserrat', sans-serif; color: #555454">NOS SOLUTIONS</h2>
             <div class="row">
+                {% for service in services %}
                 <div class="col-md-4 mb-3">
-                    <div class="service-card text-start"> <!-- Ajout de 'text-start' pour aligner le texte à gauche -->
+                    <div class="service-card text-start">
                         <div class="img-container">
-                            <img src="{% static 'assets/images/site-web.webp' %}" alt="Maintenance">
+                            <img src="{{ service.image.url }}" alt="{{ service.title }}">
                         </div>
                         <h5
                             style="text-align: left;font-size: 1.8rem; margin: 20px; font-family: 'Montserrat', sans-serif;">
-                            Création de sites web
+                            {{ service.title }}
                         </h5>
-                        <p>Donnez vie à votre projet digital avec EcomDev : des sites web personnalisés, alliant
-                            esthétique et technologies
-                            avancées pour une expérience en ligne fluide et captivante.</p>
-                        <a href="#">En Savoir Plus</a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="service-card text-start"> <!-- Ajout de 'text-start' pour aligner le texte à gauche -->
-                        <div class="img-container">
-                            <img src="{% static 'assets/images/service-seo.webp' %}" alt="Maintenance">
-                        </div>
-                        <h5
-                            style="text-align: left;font-size: 1.8rem; margin: 20px; font-family: 'Montserrat', sans-serif;">
-                            Référencement (SEO)
-                        </h5>
-                        <p>Boostez votre visibilité en ligne grâce à notre expertise en SEO, alliant stratégies
-                            performantes et analyses
-                            approfondies pour attirer un trafic ciblé.</p>
-                        <a href="#">En Savoir Plus</a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="service-card text-start"> <!-- Ajout de 'text-start' pour aligner le texte à gauche -->
-                        <div class="img-container">
-                            <img src="{% static 'assets/images/site-web.webp' %}" alt="Maintenance">
-                        </div>
-                        <h5
-                            style="text-align: left;font-size: 1.8rem; margin: 20px;   font-family: 'Montserrat', sans-serif; ">
-                            Maintenance</h5>
-                        <p>Assurez le bon fonctionnement de votre site avec notre service de maintenance, garantissant
-                            mises à jour régulières et
-                            surveillance proactive pour une performance optimale.</p>
-                        <a href="#">En Savoir Plus</a>
-                    </div>
-                </div>
+                        <p style=" color: #dfdddd">{{ service.description }}</p>
+                        {% if service.is_external %}
+                        <a href="{{ service.link }}">En Savoir Plus</a>
+                        {% else %}
+                        <a href="{% url service.link %}">En Savoir Plus</a>
+                        {% endif %}
 
+
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-
         </div>
         </div>
     </section>
+
 
     <section>
         <div class="container mt-5 statistique">
             <h3 style="text-align: center;font-family: 'Montserrat', sans-serif">NOS STATISTIQUES
             </h3>
-            <h2 class="py-4" style="font-family: 'Montserrat', sans-serif"> POURQUOI NOUS CHOISIR ?
+            <h2 class="py-4" style="font-family: 'Montserrat', sans-serif; color: #555454"> POURQUOI NOUS CHOISIR ?
             </h2>
             <p>Opter pour EcomDev, c'est choisir une expertise incomparable en création web et SEO, avec des services
                 sur mesure conçus
@@ -178,16 +159,19 @@
             <div class="container">
                 <div class="row text-center"> <!-- Ajout de text-center pour centrer le contenu -->
                     <div class="col-md-3">
-                        <div class="chiffre-cle" data-target="6" style="font-family: 'Montserrat', sans-serif">+0</div>
+                        <div class="chiffre-cle" data-target="6"
+                            style="font-family: 'Montserrat', sans-serif;  color: #555454">+0</div>
                         <p>Années d'Expérience</p>
                     </div>
                     <div class="col-md-3">
-                        <div class="chiffre-cle" data-target="235" style="font-family: 'Montserrat', sans-serif">+0
+                        <div class="chiffre-cle" data-target="235"
+                            style="font-family: 'Montserrat', sans-serif; color: #555454">+0
                         </div>
                         <p>Projets Réalisés</p>
                     </div>
                     <div class="col-md-3">
-                        <div class="chiffre-cle" data-target="99.5" style="font-family: 'Montserrat', sans-serif">+0
+                        <div class="chiffre-cle" data-target="99.5"
+                            style="font-family: 'Montserrat', sans-serif; color: #555454">+0
                         </div>
                         <p>Avis Positifs</p>
                     </div>
@@ -210,7 +194,7 @@
             }
         </style>
         <div class="container mt-5">
-            <h2 class="py-3" style="font-family: 'Montserrat', sans-serif">NOS REALISATIONS
+            <h2 class="py-3" style="font-family: 'Montserrat', sans-serif;  color: #555454">NOS REALISATIONS
             </h2>
             <p class="py-4" style="text-align: center;">Nous avons eu le privilège de collaborer avec des entreprises et
                 des projets
@@ -222,62 +206,18 @@
                 découvrez comment nous
                 avons aidé nos clients à se démarquer.</p>
             <div class="row">
-                <!-- Première ligne -->
+                {% for realisation in realisations %}
                 <div class="col-md-6 mb-4">
                     <div class="card">
-                        <img src="https://via.placeholder.com/400x300" class="card-img-top" alt="Atomi Hotel">
+                        <img src="{{ realisation.image.url }}" class="card-img-top" alt="{{ realisation.title }}">
                         <div class="card-body">
-                            <h5 class="card-title">ATOMI HOTEL</h5>
+                            <h5 class="card-title">{{ realisation.title }}</h5>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/400x300" class="card-img-top" alt="Assurance Experts">
-                        <div class="card-body">
-                            <h5 class="card-title">Experts d'Assurance</h5>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
-            <div class="row">
-                <!-- Deuxième ligne -->
-                <div class="col-md-6 mb-4">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/400x300" class="card-img-top" alt="Artisans en Gironde">
-                        <div class="card-body">
-                            <h5 class="card-title">Artisans en Gironde</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/400x300" class="card-img-top" alt="NECOBAC">
-                        <div class="card-body">
-                            <h5 class="card-title">NECOBAC</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <!-- Troisième ligne -->
-                <div class="col-md-6 mb-4">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/400x300" class="card-img-top" alt="Laboratoire AVIE">
-                        <div class="card-body">
-                            <h5 class="card-title">Laboratoire AVIE</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/400x300" class="card-img-top" alt="Laboratoire AVIE">
-                        <div class="card-body">
-                            <h5 class="card-title">Laboratoire AVIE</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
 
     </section>
@@ -309,71 +249,64 @@
                     </div>
                 </div>
 
-                <!-- Cartes des services avec une décalée -->
-                <div class="row justify-content-center mt-5">
-                    <!-- Première carte -->
-                    <div class="col-md-4 mb-3">
-                        <div class="service-avis text-start">
-                            <div class="mb-3">
-                                <img src="{% static 'assets/images/google.webp' %}" alt="Maintenance"
-                                    class="img-fluid d-block mx-auto">
-                                <img src="{% static 'assets/images/avis.webp' %}" alt="Maintenance"
-                                    class="img-fluid d-block mx-auto">
+                <!-- Cartes des services défilantes -->
+                <!--div class="avis-container">
+                    <div class="avis-wrapper">
+                        <div class="row justify-content-center mt-5 avis">
+                            {% for avis in avis_list %}
+                            <div class="col-md-4 mb-3">
+                                <div class="service-avis text-start">
+                                    <div class="mb-3">
+                                        {% if avis.image_google %}
+                                        <img src="{{ avis.image_google.url }}" alt="Image Google"
+                                            class="img-fluid d-block mx-auto">
+                                        {% endif %}
+                                        {% if avis.image_avis %}
+                                        <img src="{{ avis.image_avis.url }}" alt="Image Avis"
+                                            class="img-fluid d-block mx-auto">
+                                        {% endif %}
+                                    </div>
+                                    <p>{{ avis.contenu }}</p>
+                                    <h5>{{ avis.auteur }}</h5>
+                                </div>
                             </div>
-                            <p>Grâce à Fay dev soltion, notre site web a connu un véritable coup de boost ! Le design
-                                est
-                                moderne et épuré, et les
-                                fonctionnalités sont exactement ce dont nous avions besoin. L’équipe a été attentive à
-                                nos besoins et a toujours su
-                                répondre rapidement à nos questions. Nous sommes ravis des résultats !
-                            </p>
-                            <h5>Julie Brun</h5>
+                            {% endfor %}
                         </div>
                     </div>
+                </div-->
 
-                    <!-- Carte du milieu (décalée vers le bas) -->
-                    <div class="col-md-4 mb-3">
-                        <div class="service-avis text-start"> <!-- Ajout du 'margin-top' -->
-                            <div class="mb-3">
-                                <img src="{% static 'assets/images/google.webp' %}" alt="Maintenance"
-                                    class="img-fluid d-block mx-auto">
-                                <img src="{% static 'assets/images/avis.webp' %}" alt="Maintenance"
-                                    class="img-fluid d-block mx-auto">
+                <div class="avis-container">
+                    <div class="avis-wrapper">
+                        <div class="row justify-content-center mt-5 avis horizontal-scroll">
+                            {% for avis in avis_list %}
+                            <div class="col-md-4 mb-3">
+                                <div class="service-avis text-start">
+                                    <div class="mb-3">
+                                        {% if avis.image_google %}
+                                        <img src="{{ avis.image_google.url }}" alt="Image Google"
+                                            class="img-fluid d-block mx-auto">
+                                        {% endif %}
+                                        {% if avis.image_avis %}
+                                        <img src="{{ avis.image_avis.url }}" alt="Image Avis"
+                                            class="img-fluid d-block mx-auto">
+                                        {% endif %}
+                                    </div>
+                                    <p>{{ avis.contenu }}</p>
+                                    <h5>{{ avis.auteur }}</h5>
+                                </div>
                             </div>
-                            <p>Je recommande vivement EcomDev pour leur service de référencement. Depuis qu'ils
-                                s'occupent de notre SEO, notre trafic a
-                                considérablement augmenté. Ils ont une approche personnalisée et nous ont guidés à
-                                chaque étape. Un vrai partenaire de
-                                confiance pour notre croissance en ligne !
-                            </p>
-                            <h5>Julien Martin</h5>
-                        </div>
-                    </div>
-
-                    <!-- Troisième carte -->
-                    <div class="col-md-4 mb-3">
-                        <div class="service-avis text-start">
-                            <div class="">
-                                <img src="{% static 'assets/images/google.webp' %}" alt="Maintenance"
-                                    class="img-fluid d-block mx-auto">
-                                <img src="{% static 'assets/images/avis.webp' %}" alt="Maintenance"
-                                    class="img-fluid d-block mx-auto">
-                            </div>
-                            <p>La maintenance de notre site est entre de bonnes mains avec EcomDev. Ils assurent des
-                                mises à jour régulières et sont
-                                toujours disponibles en cas de besoin. Grâce à leur réactivité, nous avons évité
-                                plusieurs problèmes techniques. Leur
-                                professionnalisme fait toute la différence !
-                            </p>
-                            <h5>Sophie Leroy</h5>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
+
     </section>
 
-    <section class="footer" style="background-color: #014d6d; color: white;   padding: 50px 0;">
+
+    <section class="footer footer-p" style="background-color: #014d6d; color: white;   padding: 50px 0;">
         <div class="container" style="position: relative; top: 30px;">
             <div class="row">
                 <div class="col-md-3">
@@ -455,6 +388,9 @@
     </script>
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        console.log("MANU LE COQ")
+    </script>
 </body>
 
 </html>

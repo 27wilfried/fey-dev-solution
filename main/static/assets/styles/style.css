@@ -1,4 +1,6 @@
 /* Section header */
+body {}
+
 html {
     scroll-behavior: smooth;
 }
@@ -150,8 +152,10 @@ h1 {
 p,
 li {
     font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    /* Medium */
+    font-weight: 400;
+    color: #555454;
+    line-height: 1.6;
+    margin-bottom: 20px;
 }
 
 /* Appliquer la police Montserrat Regular aux boutons */
@@ -186,7 +190,7 @@ li {
 #about .about-p {
     position: relative;
     top: 30px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 #about .btn-about {
@@ -284,4 +288,9 @@ h5 {
 .footer {
     position: relative;
     top: 80px;
+}
+
+.footer-p p,
+li {
+    color: white;
 }
